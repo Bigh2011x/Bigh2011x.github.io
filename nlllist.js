@@ -13,12 +13,12 @@ const allNLLs = [
     "path": "Download/DesktopGoose v0.31.nll"
   },
   {
-    "name": "Dwarf Fortress-New.nll",
-    "path": "Download/Dwarf Fortress-New.nll"
-  },
-  {
     "name": "Edenwound.nll",
     "path": "Download/Edenwound.nll"
+  },
+  {
+    "name": "Friday Night Funkin'.nll",
+    "path": "Download/Friday Night Funkin'.nll"
   },
   {
     "name": "Geometry Dash.nll",
@@ -37,16 +37,16 @@ const allNLLs = [
     "path": "Download/Hardware Tycoon.nll"
   },
   {
-    "name": "Hex of Steel.nll",
-    "path": "Download/Hex of Steel.nll"
+    "name": "Hex of Steel; an RTS game set in WW2.nll",
+    "path": "Download/Hex of Steel; an RTS game set in WW2.nll"
   },
   {
-    "name": "Little Chef - Windows.nll",
-    "path": "Download/Little Chef - Windows.nll"
+    "name": "Little Chef.nll",
+    "path": "Download/Little Chef.nll"
   },
   {
-    "name": "Minato.nll",
-    "path": "Download/Minato.nll"
+    "name": "Minato; Minesweeper but different.nll",
+    "path": "Download/Minato; Minesweeper but different.nll"
   },
   {
     "name": "Pumpkin Cafe Coffee Game Jam.nll",
