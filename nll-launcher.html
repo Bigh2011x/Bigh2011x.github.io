@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Game Launcher</title>
+    <title>Games Downloader</title>
     <style>
         /* Basic page styling */
         body {
@@ -49,26 +49,26 @@
             white-space: nowrap;
         }
         
-        /* Styling for the documentation link */
+        /* Styling for the documentation link (Changed color for distinction) */
         #topLink a {
-            color: #4CAF50; /* A pleasant green color */
+            color: #007bff; /* Blue color for Download link */
             text-decoration: none;
             font-weight: 600;
             padding: 5px 10px;
-            border: 1px solid #4CAF50;
+            border: 1px solid #007bff;
             border-radius: 4px;
             transition: background-color 0.2s;
             display: inline-block;
             white-space: nowrap;
         }
         #topLink a:hover {
-            background-color: #4CAF50;
+            background-color: #007bff;
             color: white;
         }
 
         /* Search bar styling */
         #searchInput {
-            width: 600px; /* Fixed width for desktop/tablet */
+            width: 300px; /* Fixed width for desktop/tablet */
             padding: 8px 15px; /* Reduced padding to make the bar slimmer */
             font-size: 16px;
             border: 1px solid #ddd;
@@ -112,13 +112,13 @@
             min-height: 100vh;
         }
 
-        /* Game list container */
-        #gameList {
+        /* List container */
+        #fileList {
             margin-top: 20px;
         }
 
-        /* Styling for each game link */
-        .game-link {
+        /* Styling for each file link */
+        .file-link {
             display: block;
             padding: 15px 20px;
             background-color: #f9f9f9;
@@ -130,11 +130,11 @@
             font-size: 18px;
             margin-bottom: 10px;
             transition: background-color 0.2s, box-shadow 0.2s;
-            text-transform: none; 
+            text-transform: capitalize; 
         }
 
         /* Hover effect for links */
-        .game-link:hover {
+        .file-link:hover {
             background-color: #e9ecef;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             color: #003d80;
@@ -147,6 +147,13 @@
             font-style: italic;
             padding: 20px;
         }
+		
+		.howto {
+			color: #777;
+            text-align: center;
+            font-style: italic;
+            margin: 5px 0px;
+		}
     </style>
 </head>
 <body>
@@ -154,103 +161,89 @@
     <!-- Fixed Search Bar and Header -->
     <div class="search-bar-wrapper">
         <div class="header-group">
-            <h1 class="fixed-title">The Game Stash</h1>
+            <h1 class="fixed-title">ZIP Game Download Center</h1>
             <div id="topLink">
-                <a href="https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/edit?tab=t.0" target="_blank">
-                   The Original Game Stash
-                </a>
-            </div>
-			<div id="topLink">
-                <a href="./nll-launcher.html" target="_blank">
-                   ZIP Games Downloader
+                <a href="index.html" target="_self">
+                    Back to Games
                 </a>
             </div>
         </div>
-        
-        <input type="text" id="searchInput" placeholder="Search for a game...">
+        <p class="howto">To download games, when you click on a download make sure you rename the ending of the file from .nll to be .zip, and then extract the file to a new folder and run the .exe contained inside.</p>
+        <input type="text" id="searchInput" placeholder="Search for NLL files...">
     </div>
 
     <div class="container">
-        <!-- Game List Area -->
-        <div id="gameList"></div>
+        <!-- NLL File List Area -->
+        <div id="fileList"></div>
     </div>
 
-    <!-- 1. Load the auto-generated list of games -->
-    <script src="gamelist.js"></script>
+    <!-- 1. Load the auto-generated list of NLL files -->
+    <script src="nlllist.js"></script>
 
     <!-- 2. Run the logic script -->
     <script>
         // Get references to the HTML elements
         const searchInput = document.getElementById('searchInput');
-        const gameListContainer = document.getElementById('gameList');
+        const fileListContainer = document.getElementById('fileList');
 
         /**
-         * This function displays games on the page, applying custom naming and linking rules.
+         * This function displays the NLL files on the page.
          */
-        function displayGames(gamesToDisplay) {
-            gameListContainer.innerHTML = ''; 
+        function displayFiles(filesToDisplay) {
+            fileListContainer.innerHTML = ''; 
 
-            if (gamesToDisplay.length === 0) {
-                gameListContainer.innerHTML = '<p class="no-results">No games found matching your search.</p>';
+            if (filesToDisplay.length === 0) {
+                fileListContainer.innerHTML = '<p class="no-results">No NLL files found matching your search.</p>';
                 return;
             }
 
-            gamesToDisplay.forEach(game => {
-                const gameLink = document.createElement('a');
+            filesToDisplay.forEach(file => {
+                const fileLink = document.createElement('a');
                 
-                // Set the link to open in a new tab
-                gameLink.target = "_blank"; 
-                gameLink.href = game.path;
+                // CORE LOGIC: Rename .nll to .zip for the download name
+                const downloadName = file.name.replace(/\.nll$/i, '.zip'); 
+
+                fileLink.download = downloadName; // This forces the browser to use the .zip name
+                fileLink.href = file.path;
+                fileLink.target = "_blank"; 
                 
-                // 1. Basic Name Cleanup: Remove .html and replace symbols
-                let displayName = game.name
-                    .replace(/\.html$/i, '') 
+                // Name Cleanup: Remove .nll and replace symbols for DISPLAY
+                let displayName = file.name
+                    .replace(/\.nll$/i, '') 
                     .replace(/[-_]/g, ' '); 
 
-                // 2. Custom Logic: Check for 'cl' (case-insensitive) and process
-                if (displayName.toLowerCase().startsWith('cl')) {
-                    
-                    // Remove the first two characters ('cl', 'Cl', etc.) and trim any resulting space
-                    displayName = displayName.substring(2).trim(); 
-                    
-                    // Capitalize the new first letter
-                    if (displayName.length > 0) {
-                        displayName = displayName.charAt(0).toUpperCase() + displayName.slice(1);
-                    }
-                }
-
-                gameLink.textContent = displayName;
+                fileLink.textContent = displayName;
                 
-                gameLink.classList.add('game-link');
-                gameListContainer.appendChild(gameLink);
+                fileLink.classList.add('file-link');
+                fileListContainer.appendChild(fileLink);
             });
         }
 
         /**
-         * This function filters the allGames list based on the search input
+         * This function filters the allNLLs list based on the search input
          */
         function handleSearch() {
             const query = searchInput.value.toLowerCase().trim();
 
             // Filter the list based on the full file name (for reliable searching)
-            const filteredGames = allGames.filter(game => {
-                // We search against the file name, not the display name, for consistency
-                return game.name.toLowerCase().includes(query);
+            const filteredFiles = allNLLs.filter(file => {
+                // We search against the file name
+                return file.name.toLowerCase().includes(query);
             });
 
-            displayGames(filteredGames);
+            displayFiles(filteredFiles);
         }
 
         // --- Event Listeners and Initial Load ---
         searchInput.addEventListener('input', handleSearch);
 
-        // Initially display all games when the page first loads
-        // We check if 'allGames' exists (loaded from gamelist.js)
-        if (typeof allGames !== 'undefined') {
-            displayGames(allGames);
+        // Initially display all NLL files when the page first loads
+        // We check if 'allNLLs' exists (loaded from nlllist.js)
+        if (typeof allNLLs !== 'undefined') {
+            displayFiles(allNLLs);
         } else {
             // Error message if the build script hasn't been run
-            gameListContainer.innerHTML = '<p class="no-results">Game list not found.<br>Please ensure you have run the build script: <b>node build_list.js</b>.</p>';
+            fileListContainer.innerHTML = '<p class="no-results">NLL file list not found.<br>Please ensure you have run the NLL build script: <b>node build_nll_list.js</b>.</p>';
         }
 
     </script>
