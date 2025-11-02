@@ -1,2 +1,4 @@
-# Bigh2011x.github.io
+# Bigh2011x's game stash website
+## [The Game Stash](https://bigh2011x.github.io/)
+###### Disclaimer: The game stash was not made by me this is just a website to make it easy to find and play the games in it.
 A website for easy access to The Game Stash (Stash not made by me, website is though) https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/edit?tab=t.0
