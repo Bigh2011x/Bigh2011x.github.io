@@ -5,6 +5,10 @@
 
 const allNLLs = [
   {
+    "name": "A Dance of Fire and Ice; a very good Rythm Game.nll",
+    "path": "https://github.com/Bigh2011x/Bigh2011x.github.io/raw/refs/heads/main/Download/A%20Dance%20of%20Fire%20and%20Ice;%20a%20very%20good%20Rythm%20Game.nll"
+  },
+  {
     "name": "DeltaRune.nll",
     "path": "https://github.com/Bigh2011x/Bigh2011x.github.io/raw/refs/heads/main/Download/DeltaRune.nll?download="
   },
@@ -18,7 +22,7 @@ const allNLLs = [
   },
   {
     "name": "Friday Night Funkin'.nll",
-    "path": "Download/Friday Night Funkin'.nll"
+    "path": "https://github.com/Bigh2011x/Bigh2011x.github.io/raw/refs/heads/main/Download/Friday%20Night%20Funkin'.nll"
   },
   {
     "name": "Geometry Dash.nll",
@@ -47,6 +51,10 @@ const allNLLs = [
   {
     "name": "Minato; Minesweeper but different.nll",
     "path": "https://github.com/Bigh2011x/Bigh2011x.github.io/raw/refs/heads/main/Download/Minato;%20Minesweeper%20but%20different.nll"
+  },
+  {
+    "name": "Nova Drift; Very Good Space Shooter Highly Recommend.nll",
+    "path": "https://github.com/Bigh2011x/Bigh2011x.github.io/raw/refs/heads/main/Download/Nova%20Drift;%20Very%20Good%20Space%20Shooter%20Highly%20Recommend.nll"
   },
   {
     "name": "Pumpkin Cafe Coffee Game Jam.nll",
