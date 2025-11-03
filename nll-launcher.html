@@ -178,6 +178,7 @@
     </div>
 
     <!-- 1. Load the auto-generated list of NLL files -->
+    <!-- IMPORTANT: Ensure this nlllist.js contains the CORRECT, full HTTPS download links -->
     <script src="nlllist.js"></script>
 
     <!-- 2. Run the logic script -->
@@ -200,11 +201,17 @@
             filesToDisplay.forEach(file => {
                 const fileLink = document.createElement('a');
                 
-                // CORE LOGIC: Rename .nll to .zip for the download name
+                // CORE LOGIC 1: Rename .nll to .zip for the download attribute
+                // This ensures the file is saved with the correct name, regardless of the URL's extension.
                 const downloadName = file.name.replace(/\.nll$/i, '.zip'); 
 
-                fileLink.download = downloadName; // This forces the browser to use the .zip name
+                // CORE LOGIC 2: Set the download link to the full path
                 fileLink.href = file.path;
+                
+                // Set the 'download' attribute to suggest the correct .zip filename
+                fileLink.download = downloadName; 
+                
+                // Keep target blank for good measure, though 'download' usually overrides it
                 fileLink.target = "_blank"; 
                 
                 // Name Cleanup: Remove .nll and replace symbols for DISPLAY
